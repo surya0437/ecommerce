@@ -3,18 +3,19 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
 use Illuminate\Notifications\Notifiable;
-use Filament\Models\Contracts\FilamentUser;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable implements FilamentUser
+class Admin extends Authenticatable implements FilamentUser
 {
     use HasFactory, Notifiable;
 
-    protected $guard = 'web';
+    protected $guard = 'admin';
+
 
     /**
      * The attributes that are mass assignable.
@@ -53,15 +54,5 @@ class User extends Authenticatable implements FilamentUser
     public function canAccessPanel(Panel $panel): bool
     {
         return true;
-    }
-
-    public function shipping_addresses():HasMany
-    {
-        return $this->hasMany(ShippingAddress::class);
-    }
-
-    public function carts():HasMany
-    {
-        return $this->hasMany(Cart::class);
     }
 }
