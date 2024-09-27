@@ -18,10 +18,13 @@ class VendorResource extends Resource
     protected static ?string $model = Vendor::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-user';
-    protected static ?string $navigationGroup = 'Vendor';
+    protected static ?string $navigationGroup = 'Vendors';
+    protected static ?string $navigationLabel = 'Vendor Request';
     protected static ?int $navigationSort = 3;
-    protected static ?string $modelLabel = 'Vendor';
-    protected static ?string $pluralModelLabel = 'Vendor Requests';
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::Where('status', 'Pending')->count();
+    }
     public static function form(Form $form): Form
     {
         return $form
@@ -33,14 +36,18 @@ class VendorResource extends Resource
                     ->email()
                     ->required()
                     ->maxLength(255),
-                Forms\Components\DateTimePicker::make('email_verified_at'),
                 Forms\Components\TextInput::make('password')
                     ->password()
                     ->required()
+                    ->visibleOn('create')
                     ->maxLength(255),
-                Forms\Components\TextInput::make('status')
+                Forms\Components\Select::make('status')
                     ->required()
-                    ->maxLength(255)
+                    ->options([
+                        "Pending" => "Pending",
+                        "Approved" => "Approved",
+                        "Rejected" => "Rejected",
+                    ])
                     ->default('Pending'),
             ]);
     }
@@ -48,15 +55,33 @@ class VendorResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->defaultSort('status', 'desc')
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email')
+                    ->searchable()
+                    ->copyable(),
+                Tables\Columns\TextColumn::make('phone')
+                    ->copyable()
                     ->searchable(),
-                Tables\Columns\TextColumn::make('email_verified_at')
-                    ->dateTime()
-                    ->sortable(),
+                Tables\Columns\TextColumn::make('vendor_stores.name')
+                    ->label('Store Name')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('vendor_stores.phone')
+                    ->label('Store Phone')
+                    ->copyable()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('vendor_stores.address')
+                    ->label('Store Address')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('status')
+                    ->badge()
+                    ->color(fn(string $state): string => match ($state) {
+                        'Pending' => 'warning',
+                        'Approved' => 'success',
+                        'Rejected' => 'danger',
+                    })
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
@@ -71,7 +96,7 @@ class VendorResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
+                // Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
@@ -94,7 +119,7 @@ class VendorResource extends Resource
             'index' => Pages\ListVendors::route('/'),
             'create' => Pages\CreateVendor::route('/create'),
             'view' => Pages\ViewVendor::route('/{record}'),
-            'edit' => Pages\EditVendor::route('/{record}/edit'),
+            // 'edit' => Pages\EditVendor::route('/{record}/edit'),
         ];
     }
 }

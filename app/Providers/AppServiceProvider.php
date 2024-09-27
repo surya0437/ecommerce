@@ -2,10 +2,10 @@
 
 namespace App\Providers;
 
-use PhpParser\Node\Expr\AssignOp\Mod;
+use App\Models\Vendor;
+use App\Observers\VendorObserver;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
-use Filament\Support\View\Components\Modal;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,5 +23,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Model::unguard();
+        Vendor::observe(VendorObserver::class);
     }
 }
