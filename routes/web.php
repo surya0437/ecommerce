@@ -1,11 +1,22 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Frontend\PageController;
 
-Route::get('/', function () {
-    return view('welcome');
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::get('/', [PageController::class, 'home'])->name('home');
+Route::post('/vendor-create', [PageController::class, 'vendor_create'])->name('vendor-create');
+
+Route::get('/pass', function () {
+
+    return Hash::make('@123Surya');
 });
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
