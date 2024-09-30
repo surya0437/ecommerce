@@ -57,7 +57,7 @@ class CompanyResource extends Resource
                 Forms\Components\Toggle::make('status')
                     ->required(),
                 Forms\Components\FileUpload::make('logo')
-                ->required(),
+                    ->required(),
             ]);
     }
 

@@ -1,4 +1,4 @@
-<nav class="bg-zinc-100 dark:bg-zinc-900 py-3">
+<nav class="py-3 bg-zinc-100 dark:bg-zinc-900">
     <div class="container">
         <div class="flex items-center justify-between gap-32">
             <div>
