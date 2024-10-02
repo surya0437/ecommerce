@@ -40,16 +40,18 @@ class ProductResource extends Resource
                     ->numeric()
                     ->prefix('NRs.'),
                 Forms\Components\TextInput::make('discount_percentage')
-                    ->numeric()
                     ->label('Discount Percentage')
+                    ->required()
+                    ->numeric()
                     ->suffix('%')
-                    ->default(null),
+                    ->default(0),
 
                 Forms\Components\FileUpload::make('image')
                     ->label('Product Image')
                     ->image(),
                 Forms\Components\Toggle::make('status')
-                    ->required(),
+                    ->required()
+                    ->default(true),
             ]);
     }
 

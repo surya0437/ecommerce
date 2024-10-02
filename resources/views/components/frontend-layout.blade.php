@@ -13,9 +13,9 @@
 
 <body>
     @include('sweetalert::alert')
-    <header>
-        <x-frontend-navbar />
-    </header>
+    {{-- <header>
+    </header> --}}
+    <x-frontend-navbar />
     <main>
         {{ $slot }}
     </main>

@@ -2,17 +2,25 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Http\Controllers\Controller;
 use App\Models\Vendor;
+use App\Models\Carousel;
 use App\Models\VendorStore;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 
 class PageController extends Controller
 {
+    // public function __construct()
+    // {
+    //     $carousels = Carousel::where('status', true)->get();
+    // }
     public function home()
     {
-        return view('frontend.home');
+
+        $carousels = Carousel::where('status', true)->get();
+        $vendors = Vendor::where('status', 'Approved')->get();
+        return view('frontend.home', compact('carousels', 'vendors'));
     }
 
     public function vendor_create(Request $request)
@@ -43,8 +51,13 @@ class PageController extends Controller
 
         $vendor_store->save();
 
-        toast('Your request has been submitted ! Wait for admin approval','success');
+        toast('Your request has been submitted ! Wait for admin approval', 'success');
         return redirect()->back();
+    }
 
+    public function vendor_product($slug,$id)
+    {
+        $vendor = Vendor::find($id);
+        return view('frontend.vendor-product', compact('vendor'));
     }
 }

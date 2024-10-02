@@ -9,8 +9,13 @@ use App\Http\Controllers\Frontend\PageController;
 //     return view('welcome');
 // });
 
+// Route::get('/t', function () {
+//     return view('test');
+// });
+
 Route::get('/', [PageController::class, 'home'])->name('home');
 Route::post('/vendor-create', [PageController::class, 'vendor_create'])->name('vendor-create');
+Route::get('/products/{slug}/{id}', [PageController::class, 'vendor_product'])->name('vendor-product');
 
 Route::get('/pass', function () {
 
