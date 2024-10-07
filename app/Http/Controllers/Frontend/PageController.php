@@ -3,24 +3,45 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Models\Vendor;
+use App\Models\Product;
 use App\Models\Carousel;
 use App\Models\VendorStore;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\View;
 
 class PageController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $carousels = Carousel::where('status', true)->get();
-    // }
+    public function __construct()
+    {
+        $random_product = Product::Where('status', 1)->Pluck('name')->random();
+        View::share(['random_product' => $random_product]);
+    }
     public function home()
     {
 
         $carousels = Carousel::where('status', true)->get();
         $vendors = Vendor::where('status', 'Approved')->get();
         return view('frontend.home', compact('carousels', 'vendors'));
+    }
+
+
+    public function compare(Request $request)
+    {
+
+        $compare = $request->q;
+        if ($compare == null) {
+            toast('Enter a product to compare', 'error');
+            return redirect()->back();
+        }
+        // Query the products based on the search input
+        $products = Product::where('name', 'like', '%' . $compare . '%')
+            ->where('status', 1)
+            ->orderBy('price', 'asc')
+            ->get();
+
+        return view('frontend.compare', compact('products'));
     }
 
     public function vendor_create(Request $request)
@@ -55,9 +76,11 @@ class PageController extends Controller
         return redirect()->back();
     }
 
-    public function vendor_product($slug,$id)
+    public function vendor_product($slug, $id)
     {
         $vendor = Vendor::find($id);
         return view('frontend.vendor-product', compact('vendor'));
     }
+
+   
 }

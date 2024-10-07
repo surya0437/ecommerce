@@ -1,4 +1,4 @@
-<nav class="sticky top-0 py-3 z-[100] bg-zinc-100 dark:bg-zinc-900">
+<nav class="sticky top-0 z-50 py-3 bg-zinc-100 dark:bg-zinc-900">
     <div class="container">
         <div class="items-center justify-between hidden gap-32 lg:flex">
             <div>
@@ -7,10 +7,10 @@
                 </a>
             </div>
             <div class="flex-grow">
-                <form action="" method="get" class="flex items-center">
+                <form action="{{ route('compare') }}" method="get" class="flex items-center">
                     <input type="text"
                         class="w-full rounded-s-lg bg-transparent border-[#703273] focus:border-[#703273] h-10 px-3 focus:outline-none focus:ring-0"
-                        name="q" id="q" placeholder="Compare">
+                        name="q" id="q" placeholder="{{ $random_product }}">
                     <button type="submit"
                         class="text-white font-bold px-4 rounded-e-lg h-10 bg-[#703273] hover:bg-[#8d3391]">Compare</button>
                 </form>
@@ -75,11 +75,10 @@
             </button>
 
             <div class="mt-3">
-                <form action="" method="get" class="flex items-center">
+                <form action="{{ route('compare') }}" method="get" class="flex items-center">
                     <input type="text"
                         class="w-full rounded-s-lg bg-transparent border-[#703273] focus:border-[#703273] h-10 px-3 focus:outline-none focus:ring-0"
-                        name="q" id="q" placeholder="Compare">
-                    <button type="submit"
+                        name="q" id="q" placeholder="{{ $random_product  }}                  <button type="submit"
                         class="text-white font-bold px-4 rounded-e-lg h-10 bg-[#703273] hover:bg-[#8d3391]">Compare</button>
                 </form>
             </div>

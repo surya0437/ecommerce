@@ -1,25 +1,61 @@
-<x-guest-layout>
-    <div class="mb-4 text-sm text-gray-600 dark:text-gray-400">
-        {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+    <title>BazzarX | Login</title>
+    <link rel="stylesheet" href="/assets/css/app.min.css">
+    <link rel="stylesheet" href="/assets/bundles/bootstrap-social/bootstrap-social.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/components.css">
+    <link rel="stylesheet" href="/assets/css/custom.css">
+    <link rel='shortcut icon' type='image/x-icon' href='/assets/img/favicon.ico' />
+</head>
+
+<body>
+    <div class="loader"></div>
+    <div id="app">
+        <section class="section">
+            <div class="container mt-5">
+                <div class="row">
+                    <div
+                        class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
+                        <div class="mb-3 text-center">
+                            <x-logo />
+                        </div>
+                        <div class="card card-primary">
+
+                            <div class="card-body">
+                                <label class="control-label">Please confirm your password.</label>
+                                <form method="POST" action="{{ route('password.email') }}">
+                                    @csrf
+
+                                    <div class="mt-2">
+                                        <label for="password" class="control-label">Email</label>
+                                        <input id="email" type="email" class="form-control" name="email"
+                                            tabindex="2" value="{{ old('email') }}">
+                                        <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                                    </div>
+
+                                    <div class="mt-3">
+                                        <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
+                                            Email Password Reset Link
+                                        </button>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
+    <script src="/assets/js/app.min.js"></script>
+    <script src="/assets/js/scripts.js"></script>
+    <script src="/assets/js/custom.js"></script>
+</body>
 
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
-
-    <form method="POST" action="{{ route('password.email') }}">
-        @csrf
-
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
-                {{ __('Email Password Reset Link') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+</html>
