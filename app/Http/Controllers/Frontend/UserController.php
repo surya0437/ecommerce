@@ -34,13 +34,13 @@ class UserController extends Controller
 
         $cartItem = Cart::where('user_id', $user_id)->where('product_id', $request->product_id)->first();
 
-       if($cartItem) {
+        if ($cartItem) {
             $cartItem->quantity = $cartItem->quantity + $request->quantity;
             $cartItem->price = $cartItem->quantity * $cartItem->product->price - (($cartItem->quantity * $cartItem->product->price * $cartItem->product->discount_percentage) / 100);
             $cartItem->update();
             toast('Product quantity updated', 'success');
             return redirect()->back();
-       }
+        }
 
         $product = Product::find($request->product_id);
 
@@ -56,5 +56,20 @@ class UserController extends Controller
 
         toast('Product added to cart', 'success');
         return redirect()->back();
+    }
+
+    public function cart()
+    {
+        $carts = Cart::where('user_id', Auth::guard('web')->user()->id)->get();
+        return view('user.cart', compact('carts'));
+    }
+
+    public function cart_delete($id)
+    {
+        $cart = Cart::find($id);
+        $cart->delete();
+        toast('Product removed from cart', 'success');
+        return redirect()->back();
+
     }
 }

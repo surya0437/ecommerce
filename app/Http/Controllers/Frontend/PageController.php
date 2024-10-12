@@ -79,8 +79,14 @@ class PageController extends Controller
     public function vendor_product($slug, $id)
     {
         $vendor = Vendor::find($id);
+
+        if (!$vendor) {
+            // Handle the case where the vendor is not found
+            abort(404, 'Vendor not found');
+        }
+
         return view('frontend.vendor-product', compact('vendor'));
     }
 
-   
+
 }

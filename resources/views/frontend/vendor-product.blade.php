@@ -54,18 +54,20 @@
 
                 <div class="w-full mt-4 lg:w-4/5 md:w-3/4 md:mt-0">
                     <div class="flex flex-wrap">
-                        <!-- Search -->
-                        <form action="/vendor/121" method="get" class="flex w-full mb-4">
+
+                        <form
+                            action="{{ route('vendor-product', [Str::slug($vendor->vendor_stores[0]->name ?? 'store', '-'), $vendor->id]) }}"
+                            method="get" class="flex w-full mb-4">
                             <input type="text"
                                 class="w-full rounded-s-lg bg-transparent border-[#703273] focus:border-[#703273] h-10 px-3 focus:outline-none focus:ring-0"
-                                name="q" id="q" placeholder="Search Product by Name">
+                                name="search" id="search" placeholder="Search Product by Name">
                             <button type="submit"
                                 class="text-white font-bold px-4 rounded-e-lg h-10 bg-[#703273] hover:bg-[#8d3391]">Search</button>
                         </form>
+
                         <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
 
                             @foreach ($vendor->products as $product)
-
                                 <x-product-card :product="$product" />
                             @endforeach
 
@@ -73,8 +75,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </section>
 </x-frontend-layout>
-

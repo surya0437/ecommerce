@@ -71,21 +71,22 @@
 
             <div class="grid grid-cols-3 gap-6">
                 @foreach ($vendors as $vendor)
-                    <a href="{{ route('vendor-product', [Str::slug($vendor->vendor_stores[0]->name), $vendor->id]) }}">
-                        <div class="overflow-hidden duration-200 border rounded-md cursor-pointer hover:shadow-lg">
-                            <div>
-                                <img class="h-[200px] w-full object-cover"
-                                    src="{{ asset(Storage::url($vendor->vendor_stores[0]->featured_image)) }}"
-                                    alt="">
-                            </div>
-                            <div class="px-3 py-2">
-                                <h2 class="text-xl font-semibold text-[#703273]">{{ $vendor->vendor_stores[0]->name }}
-                                    ({{ $vendor->products->where('status', '1')->count() }})
-                                </h2>
-                                <p>{{ $vendor->vendor_stores[0]->address }}</p>
-                            </div>
+                <a href="{{ route('vendor-product', [Str::slug($vendor->vendor_stores[0]->name ?? 'store', '-'), $vendor->id]) }}">
+                    <div class="overflow-hidden duration-200 border rounded-md cursor-pointer hover:shadow-lg">
+                        <div>
+                            <img class="h-[200px] w-full object-cover"
+                                src="{{ asset(Storage::url($vendor->vendor_stores[0]->featured_image)) }}" alt="">
                         </div>
-                    </a>
+                        <div class="px-3 py-2">
+                            <h2 class="text-xl font-semibold text-[#703273]">
+                                {{ $vendor->vendor_stores[0]->name ?? 'Store Name' }}
+                                ({{ $vendor->products->where('status', '1')->count() }})
+                            </h2>
+                            <p>{{ $vendor->vendor_stores[0]->address ?? 'Store Address' }}</p>
+                        </div>
+                    </div>
+                </a>
+
                 @endforeach
 
             </div>
@@ -205,5 +206,7 @@
 
         </div>
     </section>
+
+{{ $random_product = null ? 'Product Name' : $random_product }}
 
 </x-frontend-layout>
