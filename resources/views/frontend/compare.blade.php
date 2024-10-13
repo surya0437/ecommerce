@@ -1,4 +1,4 @@
-<x-frontend-layout>
+<x-frontend-layout :PageTitle="'Compare Product'">
     <section>
         <div class="container py-5">
             <div class="flex items-center justify-between mb-5">

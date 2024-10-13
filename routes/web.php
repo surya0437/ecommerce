@@ -40,6 +40,11 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/user/cart', [UserController::class, 'cart'])->name('cart.view');
     Route::delete('/user/cart-delete/{id}', [UserController::class, 'cart_delete'])->name('cart.delete');
+    Route::get('/user/cart/checkout', [UserController::class, 'checkout'])->name('checkout.view');
+    Route::post('/user/shipping-address/store', [UserController::class, 'shipping_address'])->name('shipping_address.store');
+    Route::post('/user/order/store', [UserController::class, 'place_order'])->name('order.store');
+    Route::get('/user/order-history', [UserController::class, 'order_history'])->name('history.view');
+
 });
 
 require __DIR__ . '/auth.php';

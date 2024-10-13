@@ -11,13 +11,18 @@ class Order extends Model
 {
     use HasFactory;
 
-    public function order_descriptions():HasMany
+    public function order_descriptions(): HasMany
     {
         return $this->hasMany(OrderDescription::class);
     }
 
-    public function vendor():BelongsTo
+    public function vendor(): BelongsTo
     {
         return $this->belongsTo(vendor::class);
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }

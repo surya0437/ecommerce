@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <title>BazzarX | Login</title>
+    <title>BazzarX | Confirm Password</title>
     <link rel="stylesheet" href="/assets/css/app.min.css">
     <link rel="stylesheet" href="/assets/bundles/bootstrap-social/bootstrap-social.css">
     <link rel="stylesheet" href="/assets/css/style.css">

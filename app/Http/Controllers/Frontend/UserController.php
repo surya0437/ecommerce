@@ -6,6 +6,7 @@ use App\Models\Cart;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\ShippingAddress;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 
@@ -70,6 +71,11 @@ class UserController extends Controller
         $cart->delete();
         toast('Product removed from cart', 'success');
         return redirect()->back();
+    }
 
+    public function checkout()
+    {
+        $shipping_addresses = ShippingAddress::where('user_id', Auth::guard('web')->user()->id)->get();
+        return view('user.checkout', compact('shipping_addresses'));
     }
 }

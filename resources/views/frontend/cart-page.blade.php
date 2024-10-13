@@ -1,4 +1,4 @@
-<x-frontend-layout>
+<x-frontend-layout :PageTitle="'Single Product'">
 
     <section>
         <div class="container py-10 mx-auto">
@@ -58,7 +58,7 @@
                     </div>
                 </form>
             </div>
-            
+
         </div>
 
     </section>

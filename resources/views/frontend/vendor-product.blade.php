@@ -1,4 +1,4 @@
-<x-frontend-layout>
+<x-frontend-layout :PageTitle="'Vendor Product'">
     <section>
         <div class="relative overflow-hidden">
             <img src="{{ asset(Storage::url($vendor->vendor_stores[0]->featured_image)) }}" alt=""

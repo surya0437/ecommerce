@@ -52,6 +52,9 @@
                 <a href="{{ route('cart.view') }}" class="nav-link"><i data-feather="monitor"></i><span>Cart</span></a>
             </li>
             <li class="dropdown">
+                <a href="{{ route('history.view') }}" class="nav-link"><i data-feather="monitor"></i><span>Cart</span></a>
+            </li>
+            <li class="dropdown">
                 <a href="#" class="menu-toggle nav-link has-dropdown"><i
                         data-feather="briefcase"></i><span>Widgets</span></a>
                 <ul class="dropdown-menu">
