@@ -10,5 +10,5 @@
         <p>No logo found.</p>
     @endif
 @else
-    <img src="{{ asset('assets/logo/logo.png') }}" alt="Company Logo" style="width:120px; height:120px;">
+    <img src="{{ asset('assets/logo/logo.png') }}" alt="Company Logo" style="width:120px;">
 @endif

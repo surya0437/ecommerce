@@ -156,8 +156,15 @@ class UserController extends Controller
         return redirect()->route('history.view');
     }
 
+
     public function order_history()
     {
-        return view('user.order_history');
+        $userId = Auth::guard('web')->user()->id;
+        $orders = OrderDescription::whereHas('order', function ($query) use ($userId) {
+            $query->where('user_id', $userId);
+        })->get();
+
+        // return $orders;
+        return view('user.order_history', compact('orders'));
     }
 }

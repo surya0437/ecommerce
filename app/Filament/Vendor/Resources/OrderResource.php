@@ -10,18 +10,19 @@ use Filament\Tables\Table;
 use Filament\Resources\Resource;
 use Illuminate\Support\Facades\Auth;
 use Filament\Forms\Components\Select;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Vendor\Resources\OrderResource\Pages;
 use App\Filament\Vendor\Resources\OrderResource\RelationManagers;
-use Filament\Tables\Columns\TextColumn;
+use App\Filament\Vendor\Resources\OrderResource\RelationManagers\OrderIdRelationManager;
 
 class OrderResource extends Resource
 {
     protected static ?string $model = Order::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-truck';
     public static function getNavigationBadge(): ?string
     {
         return static::getModel()::Where('status', 'Pending')->Where('vendor_id', Auth::guard('vendor')->user()->id)->count();
@@ -71,6 +72,7 @@ class OrderResource extends Resource
             )
             ->columns([
                 Tables\Columns\TextColumn::make('order_number')
+                ->label('Order Number')
                     ->copyable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('user.name')
@@ -122,7 +124,7 @@ class OrderResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            OrderIdRelationManager::class,
         ];
     }
 
@@ -131,7 +133,7 @@ class OrderResource extends Resource
         return [
             'index' => Pages\ListOrders::route('/'),
             // 'create' => Pages\CreateOrder::route('/create'),
-            // 'view' => Pages\ViewOrder::route('/{record}'),
+            'view' => Pages\ViewOrder::route('/{record}'),
             // 'edit' => Pages\EditOrder::route('/{record}/edit'),
         ];
     }

@@ -10,9 +10,7 @@
                         <table class="table table-striped" id="table-1">
                             <thead>
                                 <tr>
-                                    <th class="text-center">
-                                        #
-                                    </th>
+                                    <th class="text-center">#</th>
                                     <th>Image</th>
                                     <th>Product Name</th>
                                     <th>Product Price</th>
@@ -22,46 +20,42 @@
                                     <th>Status</th>
                                 </tr>
                             </thead>
-                            {{-- <tbody>
+                            <tbody>
                                 @if (count($orders) > 0)
                                     @php
                                         $total = 0;
                                         $discount = 0;
                                     @endphp
-                                    @foreach ($orders as $index => $cart)
-                                        @php
-                                            $total += $cart->product->price * $cart->quantity;
-                                            $discount +=
-                                                ($cart->product->price * $cart->product->discount_percentage) / 100;
-                                        @endphp
-
+                                    @foreach ($orders as $index => $order)
                                         <tr>
                                             <td>
                                                 {{ ++$index }}
                                             </td>
                                             <td>
                                                 <img alt="image"
-                                                    src="{{ asset(Storage::url($cart->product->image)) }}"
+                                                    src="{{ asset(Storage::url($order->product->image)) }}"
                                                     width="80">
                                             </td>
 
-                                            <td>{{ $cart->product->name }}</td>
+                                            <td>{{ $order->product->name }}</td>
 
-                                            <td>{{ $cart->product->price }}/-</td>
+                                            <td>{{ $order->product->price }}/-</td>
 
-                                            <td>{{ $cart->product->discount_percentage }} %</td>
+                                            <td>{{ $order->product->discount_percentage }} %</td>
 
-                                            <td class="align-middle">{{ $cart->quantity }}</td>
+                                            <td class="align-middle">{{ $order->quantity }}</td>
 
-                                            <td>{{ $cart->price }}/-</td>
+                                            <td>{{ $order->price }}/-</td>
+                                            <td>
+                                                <span
+                                                    class="badge {{ $order->order->status == 'Pending' ? 'badge-warning' : 'badge-success' }}">{{ $order->order->status }}
+                                                </span>
+                                            </td>
 
-                                            <td><a href="{{ route('cart.delete', $cart->id) }}"
-                                                    class="btn btn-icon btn-danger" data-confirm-delete="true"><i
-                                                        class="fas fa-trash-alt"></i></a></td>
                                         </tr>
                                     @endforeach
                                 @endif
-                            </tbody> --}}
+                            </tbody>
                         </table>
                     </div>
                 </div>
