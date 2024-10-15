@@ -73,32 +73,45 @@
             'name' => 'surya',
             'email' => 'surya@gmail.com',
             'password' => 'password',
-        ]
+            'subject' => 'password',
+            'vendor_name' => 'surya',
+            'order_number' => '2155415',
+            'total_amount' => 'surya',
+            'customer_name' => 'surya',
+            'shipping_address' => 'surya',
+        ];
     @endphp --}}
+
     <div class="email-container">
         <div class="header">
-            <x-logo />
+            <x-logo/>
         </div>
         <div class="header">
-            <p> Welcome to BazzarX Market!</p>
+            <p>{{ $data['subject'] }}</p>
         </div>
         <div class="content">
-            <h2>Hello {{ $data['name'] }},</h2>
-            <p>We are excited to inform you that your request to become a vendor on our platform has been approved. You
-                can now log in to your vendor dashboard using the credentials below:</p>
+            <h2>Hello {{ $data['vendor_name'] }},</h2>
+            <p>We are excited to inform you that you have received a new order on our platform. Below are the order
+                details:</p>
 
-            <p><strong>Email:</strong> {{ $data['email'] }}</p>
-            <p><strong>Password:</strong> {{ $data['password'] }}</p>
+            <p><strong>Order Number:</strong> {{ $data['order_number'] }}</p>
+            <p><strong>Total Amount:</strong> {{ $data['total_amount'] }}/-</p>
+            <p><strong>Customer Name:</strong> {{ $data['customer_name'] }}</p>
+            <p><strong>Shipping Address:</strong> {{ $data['shipping_address'] }}</p>
 
-            <a href="{{ route('vendors') }}" class="button">Login to Your Account</a>
+            <p>Please ensure timely processing and fulfillment of this order to maintain customer satisfaction.</p>
+
+            <a href="[Vendor Dashboard URL]" class="button">View Orders in Your Dashboard</a>
 
             <p>If you have any questions or need assistance, feel free to contact our support team.</p>
-            <p>Thank you for joining us, and we look forward to a successful partnership!</p>
+            <p>Thank you for your continued partnership with us!</p>
         </div>
         <div class="footer">
-            © {{ date('Y') }} BazzarX Market !, All rights reserved.
+            © {{ date('Y') }} BazzarX Market, All rights reserved.
         </div>
     </div>
+
+
 </body>
 
 </html>

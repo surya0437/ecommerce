@@ -29,12 +29,12 @@
                                         ($single_product->price * $single_product->discount_percentage) / 100;
                                 @endphp
                                 <span class="text-lg text-gray-500 line-through">NRs.
-                                    {{ $single_product->price }}</span>
+                                    {{ round($single_product->price, 2) }}</span>
 
-                                <span class="text-xl font-bold text-[#703273]">NRs. {{ $price }}</span>
+                                <span class="text-xl font-bold text-[#703273]">NRs. {{ round($price, 2) }}</span>
                             @else
                                 <span class="text-lg text-gray-500 line-through">NRs.
-                                    {{ $single_product->price }}</span>
+                                    {{ round($single_product->price, 2) }}</span>
                             @endif
                         </div>
 

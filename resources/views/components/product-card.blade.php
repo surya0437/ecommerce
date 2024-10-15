@@ -15,22 +15,20 @@
 
             </div>
             <div class="flex-1 p-2 card-body">
-                <h5 class="text-2xl card-title">{{ $product->name }}</h5>
+                <h5 class="text-xl card-title">{{ $product->name }}</h5>
                 @if ($product->discount_percentage > 0)
                     @php
                         $price = $product->price - ($product->price * $product->discount_percentage) / 100;
                     @endphp
                     <div class="flex gap-6">
-                        <p class="text"><span class="text-sm"><s>Rs.{{ $product->price }}</s></span>
-                        <p class="text"><span class="text-sm">Rs.{{ $price }}</span>
+                        <p class="text"><span class="text-sm"><s>Rs.{{ round($product->price, 2) }}</s></span>
+                        <p class="text"><span class="text-sm">Rs.{{ round($price, 2) }}</span>
                     </div>
                 @else
-                    <p class="text"><span class="text-sm">Rs.{{ $product->price }}</span>
+                    <p class="text"><span class="text-sm">Rs.{{ round($product->price, 2) }}</span>
                 @endif
                 </p>
-                <div class="text-sm">Paachthare Nembang Fresh house</div>
             </div>
         </div>
     </a>
 </div>
-

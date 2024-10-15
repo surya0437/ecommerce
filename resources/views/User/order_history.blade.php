@@ -22,7 +22,7 @@
                                     <th>Status</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            {{-- <tbody>
                                 @if (count($orders) > 0)
                                     @php
                                         $total = 0;
@@ -61,7 +61,7 @@
                                         </tr>
                                     @endforeach
                                 @endif
-                            </tbody>
+                            </tbody> --}}
                         </table>
                     </div>
                 </div>

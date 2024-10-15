@@ -17,9 +17,9 @@
                             @foreach ($shipping_addresses as $shipping_address)
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="shipping_address"
-                                        id="exampleRadios{{ $shipping_address->id }}"
+                                        id="address{{ $shipping_address->id }}"
                                         value="{{ $shipping_address->id }}">
-                                    <label class="form-check-label" for="exampleRadios{{ $shipping_address->id }}">
+                                    <label class="form-check-label" for="address{{ $shipping_address->id }}">
                                         {{ $shipping_address->title }}
                                     </label>
                                 </div>
@@ -70,6 +70,9 @@
                             </div>
                             <input type="text" class="form-control" placeholder="eg. Home" name="title">
                         </div>
+                        @error('title')
+<span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label>Phone</label>
@@ -81,6 +84,9 @@
                             </div>
                             <input type="text" class="form-control" placeholder="eg. 98xxxxxxxxxx" name="phone">
                         </div>
+                        @error('phone')
+                        <span class="text-danger">{{ $message }}</span>
+                                                @enderror
                     </div>
                     <div class="form-group">
                         <label>Address</label>
@@ -93,6 +99,9 @@
                             <input type="text" class="form-control"
                                 placeholder="eg. 1234 Elm Street, Apt. 5B, Springfield, IL 62704, USA" name="address">
                         </div>
+                        @error('address')
+                        <span class="text-danger">{{ $message }}</span>
+                                                @enderror
                     </div>
                     <div class="d-flex justify-content-end">
                         <button type="submit" class="btn btn-primary m-t-15 waves-effect">Submit</button>

@@ -28,6 +28,7 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->authGuard('admin')
             ->login()
+            // ->registration()
             ->brandLogo(fn ()=> view('logo'))
             ->profile()
             ->colors([

@@ -10,19 +10,19 @@ use App\Http\Controllers\Frontend\UserController;
 //     return view('welcome');
 // });
 
-Route::get('/t', function () {
-    return view('auth/forgot-password');
+Route::get('/pass', function () {
+    return Hash::make('@123Surya');
 });
 
 Route::get('/', [PageController::class, 'home'])->name('home');
 Route::post('/vendor-create', [PageController::class, 'vendor_create'])->name('vendor-create');
 Route::get('/products/{slug}/{id}', [PageController::class, 'vendor_product'])->name('vendor-product');
 Route::get('/product/compare', [PageController::class, 'compare'])->name('compare');
-Route::get('/product/cart_page/{id}', [UserController::class, 'cart_page'])->name('cart_page');
+Route::get('/product/cart-page/{id}', [UserController::class, 'cart_page'])->name('cart_page');
 
 Route::get('/pass', function () {
 
-    return Hash::make('@123Surya');
+    return view('Mail.order-notification');
 });
 
 

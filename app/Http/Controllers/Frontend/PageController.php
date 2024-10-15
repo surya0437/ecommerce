@@ -15,12 +15,19 @@ class PageController extends Controller
 {
     public function __construct()
     {
-        $random_product = Product::Where('status', 1)->Pluck('name')->random();
+
+        $random_product = Product::where('status', 1)->pluck('name');
+
+        if ($random_product->isNotEmpty()) {
+            $random_product = $random_product->random(); // Pick a random product
+        } else {
+            $random_product = "Enter a product name"; // Default message if no products found
+        }
+
         View::share(['random_product' => $random_product]);
     }
     public function home()
     {
-
         $carousels = Carousel::where('status', true)->get();
         $vendors = Vendor::where('status', 'Approved')->get();
         return view('frontend.home', compact('carousels', 'vendors'));
@@ -58,7 +65,6 @@ class PageController extends Controller
         $vendor = new Vendor();
         $vendor->name = $request->name;
         $vendor->email = $request->email;
-        $vendor->phone = $request->phone;
         $vendor->password = Hash::make('password');
         $vendor->save();
 
@@ -87,6 +93,4 @@ class PageController extends Controller
 
         return view('frontend.vendor-product', compact('vendor'));
     }
-
-
 }

@@ -48,6 +48,7 @@ class ProductResource extends Resource
 
                 Forms\Components\FileUpload::make('image')
                     ->label('Product Image')
+                    ->imageEditor()
                     ->image(),
                 Forms\Components\Toggle::make('status')
                     ->required()

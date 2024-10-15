@@ -23,6 +23,7 @@
                                 </tr>
                             </thead>
                             <tbody>
+
                                 @if (count($carts) > 0)
                                     @php
                                         $total = 0;
@@ -76,31 +77,32 @@
             </div>
         </div>
 
-        <div class="col-12">
-            <div class="card">
-                <div class="card-header">
-                    <h5>Cart Summary</h5>
-                </div>
-                <div class="card-body">
-                    <div class="mb-2 d-flex align-center justify-content-between border-bottom">
-                        <div>
-                            <h6>Total</h6>
-                        </div>
-                        <div>
-                            <h6>{{ round($total) }}/-</h6>
-
-                        </div>
+        @if (count($carts) > 0)
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Cart Summary</h5>
                     </div>
-                    <div class="mb-2 d-flex align-center justify-content-between border-bottom">
-                        <div>
-                            <h6>Discount</h6>
-                        </div>
-                        <div>
-                            <h6>{{ round($discount,2) }}/-</h6>
+                    <div class="card-body">
+                        <div class="mb-2 d-flex align-center justify-content-between border-bottom">
+                            <div>
+                                <h6>Total</h6>
+                            </div>
+                            <div>
+                                <h6>{{ round($total) }}/-</h6>
 
+                            </div>
                         </div>
-                    </div>
-                    {{-- <div class="mb-2 d-flex align-center justify-content-between border-bottom">
+                        <div class="mb-2 d-flex align-center justify-content-between border-bottom">
+                            <div>
+                                <h6>Discount</h6>
+                            </div>
+                            <div>
+                                <h6>{{ round($discount, 2) }}/-</h6>
+
+                            </div>
+                        </div>
+                        {{-- <div class="mb-2 d-flex align-center justify-content-between border-bottom">
                         <div>
                             <h6>VAT</h6>
                         </div>
@@ -109,20 +111,21 @@
 
                         </div>
                     </div> --}}
-                    <div class="mb-2 d-flex align-center justify-content-between border-bottom">
-                        <div>
-                            <h5>Sub Total</h5>
+                        <div class="mb-2 d-flex align-center justify-content-between border-bottom">
+                            <div>
+                                <h5>Sub Total</h5>
+                            </div>
+                            <div>
+                                <h5>{{ round($subtotal, 2) }}/-</h5>
+                            </div>
                         </div>
-                        <div>
-                            <h5>{{ round($subtotal,2) }}/-</h5>
+                        <div class="mt-3 d-flex justify-content-end">
+                            <a href="{{ route('checkout.view') }}" class="btn btn-success">Checkout</a>
                         </div>
                     </div>
-                    <div class="mt-3 d-flex justify-content-end">
-                        <a href="{{ route('checkout.view') }}" class="btn btn-success">Checkout</a>
-                    </div>
-                </div>
 
+                </div>
             </div>
-        </div>
+        @endif
     </div>
 </x-app-layout>
