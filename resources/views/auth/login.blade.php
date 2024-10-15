@@ -68,21 +68,19 @@
                                         </button>
                                     </div>
                                 </form>
+
                                 <div class="mt-4 mb-3 text-center">
-                                    <div class="text-job text-muted">Login With Social</div>
+                                    <a href="{{ route('auth.google') }}">
+                                        <img src="https://developers.google.com/identity/images/btn_google_signin_dark_normal_web.png">
+                                    </a>
                                 </div>
-                                <div class="row sm-gutters">
-                                    <div class="col-6">
-                                        <a class="btn btn-block btn-social btn-facebook">
-                                            <span class="fab fa-facebook"></span> Facebook
-                                        </a>
-                                    </div>
-                                    <div class="col-6">
-                                        <a class="btn btn-block btn-social btn-twitter">
-                                            <span class="fab fa-twitter"></span> Twitter
-                                        </a>
-                                    </div>
-                                </div>
+
+                                {{-- <a href="{{ route('auth.google') }}" class="btn btn-primary btn-lg btn-block">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google Logo" class="google-icon" />
+                                    <span>Login with Google</span>
+                                </a> --}}
+
+
                             </div>
                         </div>
                         <div class="mt-3 text-center text-muted">

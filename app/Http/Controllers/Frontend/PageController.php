@@ -33,6 +33,12 @@ class PageController extends Controller
         return view('frontend.home', compact('carousels', 'vendors'));
     }
 
+    public function vendors()
+    {
+        $carousels = Carousel::where('status', true)->get();
+        $vendors = Vendor::where('status', 'Approved')->get();
+        return view('frontend.vendors', compact('carousels', 'vendors'));
+    }
 
     public function compare(Request $request)
     {

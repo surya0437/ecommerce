@@ -63,7 +63,7 @@
                     <p class="text-xl italic">Find Stores Near Your Location</p>
                 </div>
                 <div>
-                    <a href="" class="hover:text-[#8d3391]">
+                    <a href="{{ route('vendor.view') }}" class="hover:text-[#8d3391]">
                         View All <i class="fa-solid fa-arrow-right"></i>
                     </a>
                 </div>
@@ -79,9 +79,6 @@
                                     <img class="h-[200px] w-full object-cover"
                                         src="{{ asset(Storage::url($vendor->vendor_stores[0]->featured_image)) }}"
                                         alt="">
-                                        {{-- <img class="h-[200px] w-full object-cover"
-                                        src="{{ asset(Storage::url($vendor->vendor_stores[0]->featured_image)) }}"
-                                        alt=""> --}}
                                 </div>
                                 <div class="px-3 py-2">
                                     <h2 class="text-xl font-semibold text-[#703273]">
@@ -211,7 +208,5 @@
 
         </div>
     </section>
-
-    {{ $random_product = null ? 'Product Name' : $random_product }}
 
 </x-frontend-layout>

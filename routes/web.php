@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Frontend\PageController;
 use App\Http\Controllers\Frontend\UserController;
+use App\Http\Controllers\LoginWithGoogle\GoogleController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -15,14 +16,19 @@ Route::get('/pass', function () {
 });
 
 Route::get('/', [PageController::class, 'home'])->name('home');
+Route::get('/vendors', [PageController::class, 'vendors'])->name('vendor.view');
 Route::post('/vendor-create', [PageController::class, 'vendor_create'])->name('vendor-create');
 Route::get('/products/{slug}/{id}', [PageController::class, 'vendor_product'])->name('vendor-product');
 Route::get('/product/compare', [PageController::class, 'compare'])->name('compare');
 Route::get('/product/cart-page/{id}', [UserController::class, 'cart_page'])->name('cart_page');
 
-Route::get('/pass', function () {
+Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('auth.google');
+Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback'])->name('auth.google.callback');
 
-    return view('Mail.order-notification');
+
+Route::controller(GoogleController::class)->group(function () {
+    Route::get('auth/google', 'redirectToGoogle')->name('auth.google');
+    Route::get('auth/google/callback', 'handleGoogleCallback');
 });
 
 
@@ -44,7 +50,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/user/shipping-address/store', [UserController::class, 'shipping_address'])->name('shipping_address.store');
     Route::post('/user/order/store', [UserController::class, 'place_order'])->name('order.store');
     Route::get('/user/order-history', [UserController::class, 'order_history'])->name('history.view');
-
 });
 
 require __DIR__ . '/auth.php';
